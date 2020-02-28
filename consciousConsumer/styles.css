@@ -1,0 +1,126 @@
+/*  Jennifer Echavarria And Calid Shorter
+     May 5,2019
+     Conscious Consumerism in Sewanee
+*/
+  
+
+ #map_canvas{
+        height:70%;
+        float:left; 
+        border: 1px solid black; 
+       width:48%; 
+
+      }
+      #map2{
+        height: 50%;
+        float: right; 
+        border: 1px solid black; 
+        width:50%; 
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+       background:#FAEBD7; 
+
+      }
+       h1{
+        text-align: center;
+        font-family:'Boogaloo';  
+       }
+       h5{
+        text-align: center; 
+        font-family:'Molle';
+       }
+     .hint{
+      background-color: #A52A2A;
+      font-size: 23px;
+      color: white;
+     }
+      #bttnOne, #bttnTwo, #bttnThree, #bttnFour, #bttnFive,#bttnSix{
+         background-color: #FFDAB9; 
+         border: 1px solid black;
+         color: black;
+         padding: 15px 32px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 15px;
+         opacity: 0.6;
+         transition: 0.3s;
+         cursor: pointer;
+      }
+      #bttnOne:hover, #bttnTwo:hover, #bttnThree:hover, #bttnFour:hover ,#bttnFive:hover, #bttnSix:hover{opacity: 1}
+      .header,.active:hover{ 
+        font-size: 25px;
+        color: black;
+        background-image: url("foodBackground.jpg");
+        background-repeat: repeat;
+        background-position: center;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+       }
+       ul {
+         list-style-type: none;
+         margin: 0;
+         padding: 0;
+         overflow: hidden;
+         background-color: #A52A2A;
+      }
+
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      .active {
+         background-color: #FFDAB9;
+         color: black;
+         border: 1px solid black;
+      }
+
+      .textBox, .decor,#infobox{
+        background-color: #A52A2A;
+        color: white;  
+        float: right;
+        text-align: center;
+        margin: auto; 
+        border: 1px solid black;
+        width: 50%;
+      }
+     .gm-style .gm-style-iw {
+            top: 0 ;
+            left: 0 ;
+            width: 25% ;
+           /* height: 100% ; was commented out for images purposes*/
+            min-height: 150px ;
+           /* max-width: 10px;*/
+            padding-top: 2px;
+            display: block;
+            background-color:  #d5f5e3;
+     }
+     .gm-style .gm-style-iw #google-popup p{
+            padding: 10px;
+      }
+     .gm-style div div div div div div div div {
+            background-color: #d5f5e3 !important;
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight:bold;
+       }
+ 
+
+
+
+ 

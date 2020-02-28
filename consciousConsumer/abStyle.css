@@ -1,0 +1,90 @@
+/*  Jennifer Echavarria And Calid Shorter
+     May 5,2019
+     Conscious Consumerism in Sewanee
+*/
+  
+
+body{
+     background:#FAEBD7; 
+     text-align: center; 
+      }
+
+div.header{ 
+        font-size: 25px;
+        color: black;
+        background-image: url("foodBackground.jpg");
+        background-repeat: repeat;
+        background-position: center;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+       }
+
+body #subSect{
+  text-align:left;
+}
+
+.clurgContain{
+    width: 100%;
+    height: 11em;
+    background-color: rgba(76, 175, 80, .3);
+}
+
+.clurgContain div{
+    width: 47%;
+    margin: 1em 1em;
+    background-color: rgba(76, 175, 80, .6);
+}
+
+.goalBox{
+  float:left;
+}
+
+.chefBox{
+  float:left;
+}
+
+form{ 
+padding: 1em 2em;
+} 
+
+input{
+  width:90%;
+  padding: 12px 20px;
+  margin 2em;
+  border: .6em solid maroon;
+  border-radius: 1em;
+}
+
+input.fName{
+  width:40%;
+}
+
+input.lName{
+  width:40%;
+}
+
+input.pledge{
+height: 7em;
+}
+
+
+div.pledge{
+  width: 80%;
+  position: relative;
+  border: .6em solid black;
+  background-color: RosyBrown;
+  display: inline-block;
+ }
+
+#abs{
+  width:80%;
+  text-align: center;
+  display:inline-block; 
+}
+
+#subSect{
+  width: 100%;
+  background-color:sandyBrown;
+  text-align: left;
+}

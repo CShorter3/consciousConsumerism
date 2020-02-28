@@ -1,0 +1,297 @@
+<html> 
+<head> 
+<h1> Jennifer Echavarria </h1> 
+    <title> Google Maps</title>
+<meta charset="utf-8"/>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGPJCC0UuL1quW1tz93wX_bvON2Z7EmAA&libraries=geometry"
+        async defer></script>
+
+
+<script src="places.js"> </script> 
+<script src="tripCord.js"> </script> 
+<style>
+ .gm-style .gm-style-iw {
+            top: 0 ;
+            left: 0 ;
+            width: 100% ;
+            height: 100% ;
+            min-height: 150px ;
+            max-width: 10px;
+            padding-top: 2px;
+            display: block;
+background-color:  #d5f5e3;
+}
+
+.gm-style .gm-style-iw #google-popup p{
+            padding: 10px;
+         }
+.gm-style div div div div div div div div {
+            background-color: #d5f5e3 !important;
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight:bold;
+        }
+ 
+</style> 
+
+<script>
+ var map;
+  var infoWindow;
+  var Data = [];                
+  var viewportMarkers = []; 
+  var rotation = 0;
+  var polyLine;
+  var polyOptions;    
+
+  function init() {
+
+    var DG={lat:35.202788, lng:-85.920863};            
+
+    var mapOptions = { zoom: 3, center: DG,styles:  [
+            { "featureType": "landscape",
+               "stylers": [
+                            { "hue": "#ffee00" },
+                            { "color": "#faca75" }
+                          ]
+            },{"featureType": "water",
+                   "stylers": [
+                                { "hue": "#ffcc00" }
+                              ]
+             },{
+                "featureType": "road",
+                    "stylers": [
+                                { "visibility": "off" }
+                               ]
+            },{  "featureType": "administrative.country",
+                 "elementType": "geometry",
+                     "stylers": [
+                                  { "visibility": "off" }
+                                ]
+            },{  "featureType": "administrative.province",
+                 "elementType": "geometry",
+                     "stylers": [
+                                  { "visibility": "off" }
+                                ]
+            }
+ 
+          ]};
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {showMarkersInViewport()});
+     google.maps.event.addListener(map, 'click', function(event) {
+
+        addPoint(event);
+    });
+    showMarkersInViewport();
+
+
+// temporary SvG to animate Grabbed from http://jsfiddle.net/upsidown/eLcNq/
+   var iconCar = {
+        
+        path: 'M -53.582954,-415.35856 C -67.309015,-415.84417 -79.137232,-411.40275 -86.431515,-395.45159 L -112.76807,-329.50717 C -131.95714,-324.21675 -140.31066,-310.27864 -140.75323,-298.84302 L -140.75323,-212.49705 L -115.44706,-212.49705 L -115.44706,-183.44029 C -116.67339,-155.74786 -71.290042,-154.67757 -70.275134,-183.7288 L -69.739335,-212.24976 L 94.421043,-212.24976 L 94.956841,-183.7288 C 95.971739,-154.67759 141.39631,-155.74786 140.16998,-183.44029 L 140.16998,-212.49705 L 165.43493,-212.49705 L 165.43493,-298.84302 C 164.99236,-310.27864 156.63886,-324.21677 137.44977,-329.50717 L 111.11322,-395.45159 C 103.81894,-411.40272 91.990714,-415.84414 78.264661,-415.35856 L -53.582954,-415.35856 z M -50.57424,-392.48409 C -49.426163,-392.49037 -48.215854,-392.45144 -46.988512,-392.40166 L 72.082372,-392.03072 C 82.980293,-392.28497 87.602258,-392.03039 92.236634,-381.7269 L 111.19565,-330.61998 L -86.30787,-330.86727 L -67.554927,-380.61409 C -64.630656,-390.57231 -58.610776,-392.44013 -50.57424,-392.48409 z M -92.036791,-305.02531 C -80.233147,-305.02529 -70.646071,-295.47944 -70.646071,-283.6758 C -70.646071,-271.87217 -80.233147,-262.28508 -92.036791,-262.28508 C -103.84043,-262.28508 -113.42751,-271.87216 -113.42751,-283.6758 C -113.42751,-295.47946 -103.84043,-305.02531 -92.036791,-305.02531 z M 117.91374,-305.02531 C 129.71738,-305.02533 139.26324,-295.47944 139.26324,-283.6758 C 139.26324,-271.87216 129.71738,-262.28508 117.91374,-262.28508 C 106.1101,-262.28507 96.523021,-271.87216 96.523021,-283.6758 C 96.523021,-295.47944 106.1101,-305.02531 117.91374,-305.02531 z M 103.2216,-333.14394 L 103.2216,-333.14394 z M 103.2216,-333.14394 C 103.11577,-333.93673 102.96963,-334.55679 102.80176,-335.21316 C 101.69663,-339.53416 100.2179,-342.16153 97.043938,-345.3793 C 93.958208,-348.50762 90.488134,-350.42644 86.42796,-351.28706 C 82.4419,-352.13197 45.472822,-352.13422 41.474993,-351.28706 C 33.885682,-349.67886 27.380491,-343.34759 25.371094,-335.633 C 25.286417,-335.3079 25.200722,-334.40363 25.131185,-333.2339 L 103.2216,-333.14394 z M 64.176391,-389.01277 C 58.091423,-389.00227 52.013792,-385.83757 48.882186,-379.47638 C 47.628229,-376.92924 47.532697,-376.52293 47.532697,-372.24912 C 47.532697,-368.02543 47.619523,-367.53023 48.822209,-364.99187 C 50.995125,-360.40581 54.081354,-357.67937 59.048334,-355.90531 C 60.598733,-355.35157 62.040853,-355.17797 64.86613,-355.27555 C 68.233081,-355.39187 68.925861,-355.58211 71.703539,-356.95492 C 75.281118,-358.72306 77.90719,-361.35074 79.680517,-364.96188 C 80.736152,-367.11156 80.820083,-367.68829 80.820085,-372.0392 C 80.820081,-376.56329 80.765213,-376.87662 79.470596,-379.50637 C 76.3443,-385.85678 70.261355,-389.02327 64.176391,-389.01277 z',
+        fillColor: '#FF0000',
+        fillOpacity: .6,
+        anchor: new google.maps.Point(12,-290),
+        strokeWeight: 0,
+        scale: .05,
+        rotation: 180
+    }
+var lineSymbol = {
+          path: 'M 0,-1 0,1',
+          strokeOpacity: 1,
+          scale: 4
+        };
+ var test= new google.maps.Polyline({
+     path: [{lat:35.210813     ,lng: -85.925716    }
+           ,{lat:35.203163     ,lng:-85.920039     }]
+    ,icons:[{icon:iconCar, offset:'100%'}]
+    , map:map
+    ,strokeColor:'#d9b3ff' 
+});
+var line2= new google.maps.Polyline({ 
+     path: [{lat:35.686160     ,lng: -85.776952    }
+           ,{lat:35.203163     ,lng:-85.920039     }]
+    ,icons:[{icon:iconCar, offset:'100%'}
+           ,{icon:lineSymbol, offset:'0', repeat:'20px'}]
+    , map:map
+    ,strokeColor:'#5D6D7E  ' 
+    , strokeOpacity:0
+});
+animateCircle(test)
+animateCar(line2)
+
+ var fran= new google.maps.Marker({
+        position: new google.maps.LatLng(48.452493,2.209444),
+        title: 'France'
+        });
+  var fl = new google.maps.Marker({
+        position: new google.maps.LatLng(28.776328,-81.453856),
+        title: 'Florida'
+        });
+  
+var line = new google.maps.Polyline({ 
+                             path: new google.maps.MVCArray(france)
+                            ,strokeColor: '#00F'
+                            ,icons: [{
+                            	    icon: lineSymbol,
+                            	    offset: '100%'
+                            	  }]
+                            });
+
+
+
+}//end of init
+var firstInfo= new google.maps.InfoWindow({
+  content: 'Hello World' 
+});
+function animatefran(line) {
+    //cleaning of everything on the map
+    $('#trip').hide(500);
+    line2.setMap(null);
+    line3.setMap(null);
+    line4.setMap(null);
+    
+    firstInfo.close();
+    scndInfo.close();
+    thirdInfo.close();
+    
+    //line set up
+    line.setMap(map);
+    map.setZoom(3);
+    map.setCenter(new google.maps.LatLng(36.795907, -40.377031));
+    
+    //animation
+    var count = 0;
+    var anim = window.setInterval(function() {
+      count = (count + 1) % 200;
+
+      var icons = line.get('icons');
+      icons[0].offset = (count / 2) + '%';
+      line.set('icons', icons);
+      if(count==199){
+        window.clearInterval(anim);
+        //appearance of the markers and info windows on the first stop
+        map.setCenter(new google.maps.LatLng(28.293225, -79.924337));
+        map.setZoom(6);
+        fran.setMap(map);
+        firstInfo.open(map, fran);
+      }
+  }, 10); 
+  
+}
+  function animateCircle(test) {
+          var count = 0;
+          window.setInterval(function() {
+            count = (count + 1) % 200;
+
+            var icons = test.get('icons');
+            icons[0].offset = (count / 2) + '%';
+            test.set('icons', icons);
+        }, 10);
+      }
+  function animateCar(line2) {
+          var count = 0;
+          window.setInterval(function() {
+            count = (count + 1) % 200;
+
+            var icons = line2.get('icons');
+            icons[0].offset = (count / 2) + '%';
+            line2.set('icons', icons);
+        }, 20);
+      }
+
+  function showMarkersInViewport() {
+    if (map.getBounds() == null) return;
+    var placesInViewport = getplaces(map.getBounds());
+    if (viewportMarkers != null) {
+      for (i = 0; i < viewportMarkers.length; i++) {
+        viewportMarkers[i].setMap(null);
+      }
+      viewportMarkers = [];
+    }
+
+   
+
+    for (i = 0; i < placesInViewport.length; i++) {
+
+      latLng = new google.maps.LatLng(placesInViewport[i].Location.Latitude
+                                     ,placesInViewport[i].Location.Longitude);
+      
+      var marker = new google.maps.Marker({
+              position: latLng,
+              title: 'LOCAL: ' + placesInViewport[i].Name + ' in ' 
+                               + placesInViewport[i].City + ', ' 
+                               + placesInViewport[i].State, 
+              animation: google.maps.Animation.DROP,
+              icon: placesInViewport[i].Product
+            });
+  marker.objInfo= '<span style="font-family:Trebuchet MS; font-size:10pt; color: maroon">'
+                  + '<img src=" '
+                   + placesInViewport[i].image 
+                   +'" style="width:50%; height:50%;">' 
+                  + '<style="width:70px; height:70px"><br><b>' 
+                  + placesInViewport[i].Name
+                  + '</b> <br> <p><i>' 
+                  +  placesInViewport[i].Description 
+                  + '</i></p>'; 
+     (function(index, selectedMarker)
+      {
+              google.maps.event.addListener(selectedMarker, 'click', function() {
+                          if (infoWindow != null) infoWindow.setMap(null); 
+                          infoWindow = new google.maps.InfoWindow(); 
+                          infoWindow.setContent(selectedMarker.objInfo); 
+                          infoWindow.open(map, selectedMarker); 
+                          });
+})(i, marker)
+     // Grabbed Online... https://stackoverflow.com/questions/37456627/how-to-change-the-infowindow-background-color 
+      google.maps.event.addListenerOnce(map, 'idle', function(){
+          jQuery('.gm-style-iw').prev('div').remove();
+      }); 
+
+      marker.setMap(map);
+      viewportMarkers.push(marker);
+
+    }//endfor
+  }
+
+ 
+
+
+  function getplaces(B) {
+    var selected = [];
+    for (i = 0; i < places.length; i++) {
+      if (B.contains(new google.maps.LatLng(places[i].Location.Latitude, places[i].Location.Longitude))) {
+        selected.push(places[i]);
+      }
+    }
+    return selected;
+  }
+
+  function adjustMap(){ 
+   
+   map.addListener('zoom_changed',function(){
+
+       infowindow.setContent('zoom:10' +map.getZoom());
+   })
+  } 
+  function highlightMarker(index) {
+    if (infoWindow != null) infoWindow.setMap(null);
+    infoWindow = new google.maps.InfoWindow();
+    infoWindow.setContent(viewportMarkers[index].objInfo);
+    infoWindow.open(map, viewportMarkers[index]);
+  }
+</script> 
+
+    </head>
+<body bgcolor="#b0DDb0" onload="init(); ">
+        <div id="map_canvas" style="height:70%; width: 70%"></div>
+    <button onclick= "animatefran(line)"> TRY ME</button>
+</body>
+
+
+</html> 
+ 

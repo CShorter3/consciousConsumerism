@@ -1,0 +1,89 @@
+<!-- Jennifer Echavarria And Calid Shorter
+     May 5,2019
+     Conscious Consumerism in Sewanee
+  
+-->
+
+<html> 
+<head>
+ <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Boogaloo|Molle">
+<link rel="icon" type="image/x-icon" href="eat.ico"/> 
+  <title>Conscious Consumerism in Sewanee</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+  <div class= header>
+    <h1> Conscious Cosumerism in Sewanee</h1>
+    <h5> Calid Shorter and Jennifer Echavarria </h5> 
+  </div>
+</head>
+
+<body onload="initialize(); init();">
+  <ul>
+    <li><button id="bttnOne" onclick="window.location.href='https://hive.sewanee.edu/shortc0/CS286/consciousConsumer/fft.html';">
+     <b>Food consumption Info</b> 
+      </button> 
+    </li>
+    <li><button id="bttnTwo" 
+       onclick=" mapRadii();">
+       <b>What is considered local?</b></button> 
+    </li>
+    <li><button id="bttnThree" 
+       onclick=" buttonWork();">
+      <b>Origin of Food</b></button> 
+    </li>
+   
+    <li style="float:right">
+      <a class="active" href="http://hive.sewanee.edu/shortc0/CS286/consciousConsumer/abstract.html">About</a>
+     </li>
+  </ul> 
+<hr>
+<div class="hint">
+Click on markers to open infoWindow and learn about them. <br> Each picture on the map demonstrates what kind of food is coming from each company. <br>The initial point is McClurg Dinning Hall where we the students are the consumer of these foods. Hence, the Smiley Face. (: <br>  
+<span style="color:green;"> ------ </span> Means that these companies have a 4/5 star ratings <br> 
+<span style="color:yellow;"> -----</span> Means that these comapanies have a 2/3 star ratings<br>
+</div> 
+<hr>
+<div id="infoBox">
+
+</div>
+<div id="map_canvas"></div>
+<div id="map2"></div> 
+<script src="places.js"></script> 
+<!--This Generates code for Map to the left --> 
+<script src="initial.js"></script>
+<script src="markers.js"></script>
+<!-- This Generetes code for Map2 on the right --> 
+
+<script src="map2.js"></script>
+ 
+<div class="decor"> 
+   <button id="A" onclick="showMarkersInViewport7(); getInfo(0);"
+        style= "visibility: hidden;"> Arugula</button> 
+   <button id="G"  onclick="showMarkersInViewport2();getInfo(1);"
+        style= "visibility: hidden;"> Granola</button> 
+   <button id="C" onclick="showMarkersInViewport3(); getInfo(2);"
+        style= "visibility: hidden;"> Coffee</button> 
+   <button id="P"  onclick="showMarkersInViewport4();getInfo(3);"
+        style= "visibility: hidden;"> Potatoes</button>
+   <button id="W"  onclick="showMarkersInViewport5();getInfo(4);"
+        style= "visibility: hidden;"> Watermelon</button>
+   <button id="L"  onclick="showMarkersInViewport6();getInfo(5);"
+        style= "visibility: hidden;"> Lemons</button>
+</div> 
+  <div class= textBox> 
+      <p>  Ever wonder what type of food you eat at Sewanee comes from? <br>
+           Click the buttons to view the the different consumptions of the foods we eat. <br>
+           This page is to demonstrate where we get our food from,<br> 
+           how it is traveled, where it originated from, and <br>
+           learning the different compainies in which Sewanee invests in.<br>  
+      </p> 
+  </div> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGPJCC0UuL1quW1tz93wX_bvON2Z7EmAA&libraries=geometry"
+        async defer></script>   
+  </body>
+
+
+</html>
+
